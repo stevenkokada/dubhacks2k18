@@ -1,5 +1,6 @@
 var conversion = {"bags of rice": 1/0.89}
 
+// recursive solution
 function walkText(node, parent) {
   if (node.nodeType == 3) {
     var text = node.nodeValue;
