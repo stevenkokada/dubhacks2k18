@@ -1,24 +1,32 @@
-var conversion = {"bags of rice": 1/0.89}
+var conversion = {"lbs of rice": 1/0.89, 
+                  "meals": 1/8.0, 
+                  "weeks of groceries": 1/160.0, 
+                  "lbs of pork": 1/4.14};
 
 // recursive solution
 function walkText(node, parent) {
   if (node.nodeType == 3) {
     var text = node.nodeValue;
-    var r = /\.*\$\d+(\.\d\d)?\.*/g;
+    //var r = /\.*\$\d+(\.\d\d)?\.*/g;
+    var r = /^\$\d+(,\d{3})*\.?[0-9]?[0-9]?$/;
     var original = text.match(r);
 
     if (original != null){
-      var priceText = original.toString().trim();
+      var priceText = original.toString().trim().replace(',','');
       if(priceText.charAt(0) == "$") {
         priceText = priceText.substring(1);
       }
 
-      var numeric = parseFloat(priceText) * conversion["bags of rice"]
-      var replacedText = text.replace(r, numeric.toFixed(2).toString() + " bags of rice");
+      chrome.storage.sync.get("currency-type", function(result) {
+        var conversion_type = result['currency-type'];
 
-      if (replacedText !== text) {
-        parent.replaceChild(document.createTextNode(replacedText), node);
-      }
+        var numeric = parseFloat(priceText) * conversion[conversion_type]
+        var replacedText = text.replace(r, numeric.toFixed(2).toString() + " " + conversion_type);
+
+        if (replacedText !== text) {
+          parent.replaceChild(document.createTextNode(replacedText), node);
+        }
+      });
     }
   }
 
@@ -29,5 +37,14 @@ function walkText(node, parent) {
     }
   }
 }
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  for (key in changes) {
+    if(key == "currency-type") {
+      location.reload();
+      return;
+    }
+  }
+});
 
 walkText(document.body, document);
