@@ -20,7 +20,7 @@ chrome.storage.sync.get("currency-type", function(result) {
 
   }
 
-  if (conversion_type = 'days of child labor'){
+  if (conversion_type == 'days of child labor'){
     window.open("http://endchildlabor.net/donate/");
   }
 
