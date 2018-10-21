@@ -25,23 +25,15 @@
     "content_scripts": [
         {   // Loads price changes and content
             "matches": [
-                "*://*/*"
+                "*://*.amazon.com/*", "*://*.ebay.com/*", "*://*.walmart.com/*", "*://*.etsy.com/*", "*://*.target.com/*",
+                "*://*.aliexpress.com/*", "*://*.costco.com/*", "*://*.kohls.com/*", "*://*.wish.com/*", "*://*.sears.com/*",
+                "*://*.alibaba.com/*"
             ],
             "all_frames": true,
             "js": [
-                "jquery-3.3.1.min.js", "content.js"
+                "jquery-3.3.1.min.js", "content.js", "display_report.js"
             ],
             "run_at": "document_idle"
-        },
-        {   // Descriptive data visualization/hyperlinkes
-            "matches": [
-                "*://*/*"
-            ],
-            "js": [
-                "display_report.js"
-            ],
-            "run_at": "document_idle"
-
         }
       ]
 }
