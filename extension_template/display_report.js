@@ -1,6 +1,6 @@
 $("span:contains('Add to Cart')").siblings("input").click(function(){
 
-// Proceed to checkout elements load way too late to be identified by this selector :()
+// Proceed to checkout elements load way too late to be identified by this selector :(
 // $("span:contains('Proceed to checkout')").siblings("input").click(function(){
 
 chrome.storage.sync.get("currency-type", function(result) {
