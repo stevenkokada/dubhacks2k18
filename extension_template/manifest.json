@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
-    "name": "[your extension name here]",
-    "description": "[your extension description here]",
+    "name": "Dubhacks2k18",
+    "description": "Impactful spending metrics.",
     "version": "1.0",
     "content_scripts": [
         {
@@ -10,7 +10,7 @@
             ],
             "all_frames": true,
             "js": [
-                "content.js"
+                "jquery-3.3.1.min.js", "content.js"
             ],
             "run_at": "document_idle"
         }
