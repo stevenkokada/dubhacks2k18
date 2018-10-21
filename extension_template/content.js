@@ -15,33 +15,15 @@ function walkText(node, parent, conversion_type) {
 
     var numeric = parseFloat(cleaned) * conversion[conversion_type];
 
-    return numeric.toFixed(2).toString() + " " + conversion_type;
+    return numeric.toFixed(2).toString() + " " + conversion_type + 
+        " (" + parseFloat(cleaned).toFixed(2).toString() + " USD)";
   }
 
-  if(node.nodeType == 3) {
-    var text = node.nodeValue;
-    var r = /\.*\$\d+(,\d{3})*\.?[0-9]?[0-9]?\.*/;
-    var original = text.match(r);
+  if(node.nodeType == 1 && $(node).hasClass("sx-price")) {
+    var converted = convertPrice($(node).children("[class~=sx-price-whole]").html() + 
+        "." + $(node).children("[class~=sx-price-fractional]").html());
 
-    if(original != null) {
-      var converted = convertPrice(original.toString());
-      var replaced_text = text.replace(r, converted);
-
-      // console.log(converted, replaced_text);
-
-      /*if(replaced_text !== text) {
-        parent.replaceChild(document.createTextNode(replaced_text), node);
-      }*/
-
-      node.nodeValue = replaced_text;
-    }
-  } else if(node.nodeType == 1 && $(node).hasClass("sx-price")) {
-    var price = parseFloat($(node).children("[class~=sx-price-whole]").html() + "." +
-                           $(node).children("[class~=sx-price-fractional]").html());
-
-    node.innerHTML = '<span class="sx-price-whole">' +
-        (price * conversion[conversion_type]).toFixed(2).toString()
-        + ' ' + conversion_type + '</span>';
+    node.innerHTML = '<span class="sx-price-whole">' + converted + '</span>';
   } else if(node.nodeType == 1 && $(node).hasClass("a-price")) {
     var converted = convertPrice($(node).children("[class~=a-offscreen]").html());
 
@@ -49,6 +31,16 @@ function walkText(node, parent, conversion_type) {
   } else if(node.nodeType == 1 && node.nodeName != "SCRIPT") {
     for(var i = 0; i < node.childNodes.length; i++) {
       walkText(node.childNodes[i], node, conversion_type);
+    }
+  } else if(node.nodeType == 3) {
+    var text = node.nodeValue;
+    var r = /\$\d+(,\d{3})*\.?[0-9]?[0-9]?/g;
+    var original = text.match(r);
+
+    if(original != null) {
+      var replaced_text = text.replace(r, function(pri){ return convertPrice(pri); });
+
+      node.nodeValue = replaced_text;
     }
   }
 }
