@@ -7,10 +7,10 @@
           "128": "images/growth128.png" },
     "browser_action": {
         "default_icon": {"16": "images/growth16.png"},
-        "default_title": "POTI",                      
+        "default_title": "POTI",
         "default_popup": "ui.html"    },
 
-    "permissions": [  
+    "permissions": [
         "storage"
     ],
 
@@ -22,25 +22,17 @@
     },
 
     "content_scripts": [
-        { 
+        {
             "matches": [
-                "*://*/*"
+                "*://*.amazon.com/*", "*://*.ebay.com/*", "*://*.walmart.com/*", "*://*.etsy.com/*", "*://*.target.com/*",
+                "*://*.aliexpress.com/*", "*://*.costco.com/*", "*://*.kohls.com/*", "*://*.wish.com/*", "*://*.sears.com/*",
+                "*://*.alibaba.com/*"
             ],
             "all_frames": true,
             "js": [
-                "jquery-3.3.1.min.js", "content.js"
+                "jquery-3.3.1.min.js", "content.js", "display_report.js"
             ],
             "run_at": "document_idle"
-        },
-        { 
-            "matches": [
-                "*://*/*"
-            ],
-            "js": [
-                "display_report.js"
-            ],
-            "run_at": "document_idle"
-
         }
       ]
 }
