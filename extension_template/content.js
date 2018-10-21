@@ -31,6 +31,7 @@ var conversion = {"bags of rice": 300}
 // }
 //
 
+// recursive solution
 function walkText(node) {
 
   var conversion = {"bags of rice": 300}
