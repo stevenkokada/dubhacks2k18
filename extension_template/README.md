@@ -1,4 +1,4 @@
-###### ShopAltruism
+# ShopAltruism
 
 People who live comfortable lives are often disconnected from the conditions and realities of people living in third
 world countries. ShopAltruism aims to help online shoppers gain a better sense of how far their dollar actually goes,
