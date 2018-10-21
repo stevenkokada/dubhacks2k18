@@ -3,7 +3,8 @@ var conversion = {"lbs of rice": 1/0.89,
                   "weeks of groceries": 1/160.0,
                   "malaria nets": 1/2.0,
                   "gals of water": 1/1.22,
-                  "days of child labor": 1/0.2};
+                  "days of child labor": 1/0.2,
+                  "big macs": 1/5.51};
 
 function walkText(node, parent, conversion_type) {
   var convertPrice = function(price_string) {
