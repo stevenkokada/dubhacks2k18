@@ -2,12 +2,12 @@
 "manifest_version": 2,
     "name": "ShopAware",
     "description": "Converts online prices to impactful spending metrics for the everyday philanthropist, guiding us towards altruism",
-    "version": "1.0",
+    "version": "1.0.2",
     "icons": { "16": "images/growth16.png",
           "128": "images/growth128.png" },
     "browser_action": {
         "default_icon": {"16": "images/growth16.png"},
-        "default_title": "POTI",
+        "default_title": "ShopAware",
         "default_popup": "ui.html"    },
 
     "permissions": [
