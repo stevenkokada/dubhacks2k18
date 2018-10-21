@@ -51,7 +51,9 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 var obs_callback = function(mutList, obs) {
   for(var mut of mutList) {
     if(mut.type == 'childList') {
-      
+      for(var i = 0; i < mut.addedNodes.length; i++) {
+        walkText(mut.addedNodes[i], mut.target);
+      }
     }
   }
 }
