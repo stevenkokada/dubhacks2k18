@@ -4,7 +4,7 @@ var conversion = {"lbs of rice": 1/0.89,
                   "malaria nets": 1/2.0,
                   "gals of water": 1/1.22,
                   "days of child labor": 1/0.2,
-                  "big macs": 1/5.51};
+                  "big macs": 1/5.51}; // as of July 2018
 
 // recursive solution
 function walkText(node, parent) {

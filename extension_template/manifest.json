@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
-    "name": "ShopAltruism",
-    "description": "Converts online prices to impactful spending metrics for the everyday philanthropist",
+    "name": "ShopAware",
+    "description": "Converts online prices to impactful spending metrics for the everyday philanthropist, guiding us towards altruism",
     "version": "1.0",
     "icons": { "16": "images/growth16.png",
           "128": "images/growth128.png" },
