@@ -8,7 +8,7 @@ function walkText(node, parent) {
   if (node.nodeType == 3) {
     var text = node.nodeValue;
     //var r = /\.*\$\d+(\.\d\d)?\.*/g;
-    var r = /^\$\d+(,\d{3})*\.?[0-9]?[0-9]?$/;
+    var r = /\.*\$\d+(,\d{3})*\.?[0-9]?[0-9]?\.*/;
     var original = text.match(r);
 
     if (original != null){
@@ -47,4 +47,15 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   }
 });
 
+var obs_callback = function(mutList, obs) {
+  for(var mut of mutList) {
+    if(mut.type == 'childList') {
+      
+    }
+  }
+}
+
+var obs = new MutationObserver(obs_callback);
 walkText(document.body, document);
+
+obs.observe(document.body, {attributes: true, childList: true, subtree: true});
