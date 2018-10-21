@@ -5,6 +5,6 @@ world countries. ShopAltruism aims to help online shoppers gain a better sense o
 by replacing dollar prices with more meaningful metrics, such as 'hours of child labor', 'pounds of rice', and more.
 ShopAltruism also encourages users to donate, by opening a donation tab every time a user adds a product to their cart.
 
-![Screenshot](/dubhacks2k18/demoimg/malarianetexample.PNG)
+![Screenshot](https://github.com/stevenkokada/dubhacks2k18/blob/master/demoimg/malarianetsexample.PNG)
 
 Icon made by freepic@flaticon.com from www.flaticon.com 
