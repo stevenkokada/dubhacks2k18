@@ -4,16 +4,17 @@
     "description": "[your extension description here]",
     "version": "1.0",
     "browser_action": {
-        "default_icon": {"16": "images/icon16.png"},       // optional
-        "default_title": "POTI",      // optional; shown in tooltip
-        "default_popup": "ui.html"        // optional
+        "default_icon": {"16": "images/icon16.png"},        // toolbar icon
+        "default_title": "POTI",                            // hover text
+        "default_popup": "ui.html"                          // menu design
     },
 
-    "permissions": [
+    "permissions": [                                        // stores data about the currency
         "storage"
     ],
+
     "content_scripts": [
-        {
+        {   // Loads price changes and content
             "matches": [
                 "*://*/*"
             ],
@@ -23,18 +24,15 @@
             ],
             "run_at": "document_idle"
         },
-         {
+        {   // Descriptive data visualization/hyperlinkes
             "matches": [
                 "*://*/*"
             ],
             "js": [
-          "display_report.js"
+                "display_report.js"
             ],
             "run_at": "document_idle"
 
         }
-
-
       ]
-
 }
