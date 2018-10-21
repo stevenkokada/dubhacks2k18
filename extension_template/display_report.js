@@ -1,4 +1,4 @@
-$("#add-to-cart-button, .a-button-input").click(function(){
+$("#add-to-cart-button, .a-button-input").unbind().click(function(){
 
 
 chrome.storage.sync.get("currency-type", function(result) {
