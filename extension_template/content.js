@@ -1,7 +1,8 @@
-var conversion = {"lbs of rice": 1/0.89, 
-                  "meals": 1/8.0, 
-                  "weeks of groceries": 1/160.0, 
-                  "lbs of pork": 1/4.14};
+var conversion = {"lbs of rice": 1/0.89,
+                  "meals": 1/8.0,
+                  "weeks of groceries": 1/160.0,
+                  "malaria nets": 1/2.0,
+                  "gals of water": 1/1.22};
 
 // recursive solution
 function walkText(node, parent) {
