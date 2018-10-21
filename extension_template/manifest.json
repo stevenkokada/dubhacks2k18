@@ -13,6 +13,19 @@
                 "content.js"
             ],
             "run_at": "document_idle"
+        },
+         {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+          "display_report.js"
+            ],
+            "run_at": "document_idle"
+
         }
-    ]
+
+
+      ]
+
 }
