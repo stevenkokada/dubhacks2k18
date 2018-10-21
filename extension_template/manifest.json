@@ -6,12 +6,11 @@
     "icons": { "16": "images/growth16.png",
           "128": "images/growth128.png" },
     "browser_action": {
-        "default_icon": {"16": "images/growth16.png"},        // toolbar icon
-        "default_title": "POTI",                            // hover text
-        "default_popup": "ui.html"                          // menu design
-    },
+        "default_icon": {"16": "images/growth16.png"},
+        "default_title": "POTI",                      
+        "default_popup": "ui.html"    },
 
-    "permissions": [                                        // stores data about the currency
+    "permissions": [  
         "storage"
     ],
 
@@ -23,7 +22,7 @@
     },
 
     "content_scripts": [
-        {   // Loads price changes and content
+        { 
             "matches": [
                 "*://*/*"
             ],
@@ -33,7 +32,7 @@
             ],
             "run_at": "document_idle"
         },
-        {   // Descriptive data visualization/hyperlinkes
+        { 
             "matches": [
                 "*://*/*"
             ],
