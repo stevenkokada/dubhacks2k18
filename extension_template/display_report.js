@@ -21,7 +21,7 @@ chrome.storage.sync.get("currency-type", function(result) {
   }
 
   if (conversion_type == 'days of child labor'){
-    window.open("http://endchildlabor.net/donate/");
+    window.open("https://support.savethechildren.org/site/Donation2?df_id=1620&1620.donation=form1");
   }
 
 
