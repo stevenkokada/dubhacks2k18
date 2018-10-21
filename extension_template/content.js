@@ -27,7 +27,7 @@ function walkText(node, parent, conversion_type) {
       var converted = convertPrice(original.toString());
       var replaced_text = text.replace(r, converted);
 
-      console.log(converted, replaced_text);
+      // console.log(converted, replaced_text);
 
       /*if(replaced_text !== text) {
         parent.replaceChild(document.createTextNode(replaced_text), node);
@@ -39,7 +39,7 @@ function walkText(node, parent, conversion_type) {
     var price = parseFloat($(node).children("[class~=sx-price-whole]").html() + "." +
                            $(node).children("[class~=sx-price-fractional]").html());
 
-    node.innerHTML = '<span class="sx-price-whole">' + 
+    node.innerHTML = '<span class="sx-price-whole">' +
         (price * conversion[conversion_type]).toFixed(2).toString()
         + ' ' + conversion_type + '</span>';
   } else if(node.nodeType == 1 && $(node).hasClass("a-price")) {
