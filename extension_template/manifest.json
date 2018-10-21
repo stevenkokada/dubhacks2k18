@@ -1,10 +1,12 @@
 {
 "manifest_version": 2,
-    "name": "Dubhacks2k18",
-    "description": "Impactful spending metrics.",
+    "name": "ShopAltruism",
+    "description": "Converts online prices to impactful spending metrics for the everyday philanthropist",
     "version": "1.0",
+    "icons": { "16": "images/growth16.png",
+          "128": "images/growth128.png" },
     "browser_action": {
-        "default_icon": {"16": "images/icon16.png"},        // toolbar icon
+        "default_icon": {"16": "images/growth16.png"},        // toolbar icon
         "default_title": "POTI",                            // hover text
         "default_popup": "ui.html"                          // menu design
     },
