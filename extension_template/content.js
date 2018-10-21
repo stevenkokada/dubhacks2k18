@@ -5,37 +5,49 @@ var conversion = {"lbs of rice": 1/0.89,
                   "gals of water": 1/1.22,
                   "days of child labor": 1/0.2};
 
-// recursive solution
-function walkText(node, parent) {
-  if (node.nodeType == 3) {
+function walkText(node, parent, conversion_type) {
+  var convertPrice = function(price_string) {
+    var cleaned = price_string.trim().replace(',','');
+    if(cleaned.charAt(0) == "$") {
+      cleaned = cleaned.substring(1);
+    }
+
+    var numeric = parseFloat(cleaned) * conversion[conversion_type];
+
+    return numeric.toFixed(2).toString() + " " + conversion_type;
+  }
+
+  if(node.nodeType == 3) {
     var text = node.nodeValue;
-    //var r = /\.*\$\d+(\.\d\d)?\.*/g;
     var r = /\.*\$\d+(,\d{3})*\.?[0-9]?[0-9]?\.*/;
     var original = text.match(r);
 
-    if (original != null){
-      var priceText = original.toString().trim().replace(',','');
-      if(priceText.charAt(0) == "$") {
-        priceText = priceText.substring(1);
-      }
+    if(original != null) {
+      var converted = convertPrice(original.toString());
+      var replaced_text = text.replace(r, converted);
 
-      chrome.storage.sync.get("currency-type", function(result) {
-        var conversion_type = result['currency-type'];
+      console.log(converted, replaced_text);
 
-        var numeric = parseFloat(priceText) * conversion[conversion_type]
-        var replacedText = text.replace(r, numeric.toFixed(2).toString() + " " + conversion_type);
+      /*if(replaced_text !== text) {
+        parent.replaceChild(document.createTextNode(replaced_text), node);
+      }*/
 
-        if (replacedText !== text) {
-          parent.replaceChild(document.createTextNode(replacedText), node);
-        }
-      });
+      node.nodeValue = replaced_text;
     }
-  }
+  } else if(node.nodeType == 1 && $(node).hasClass("sx-price")) {
+    var price = parseFloat($(node).children("[class~=sx-price-whole]").html() + "." +
+                           $(node).children("[class~=sx-price-fractional]").html());
 
+    node.innerHTML = '<span class="sx-price-whole">' + 
+        (price * conversion[conversion_type]).toFixed(2).toString()
+        + ' ' + conversion_type + '</span>';
+  } else if(node.nodeType == 1 && $(node).hasClass("a-price")) {
+    var converted = convertPrice($(node).children("[class~=a-offscreen]").html());
 
-  if (node.nodeType == 1 && node.nodeName != "SCRIPT") {
-    for (var i = 0; i < node.childNodes.length; i++) {
-      walkText(node.childNodes[i], node);
+    node.innerHTML = '<span class="a-price-whole">' + converted + '</span>';
+  } else if(node.nodeType == 1 && node.nodeName != "SCRIPT") {
+    for(var i = 0; i < node.childNodes.length; i++) {
+      walkText(node.childNodes[i], node, conversion_type);
     }
   }
 }
@@ -50,16 +62,22 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 });
 
 var obs_callback = function(mutList, obs) {
-  for(var mut of mutList) {
-    if(mut.type == 'childList') {
-      for(var i = 0; i < mut.addedNodes.length; i++) {
-        walkText(mut.addedNodes[i], mut.target);
+  chrome.storage.sync.get("currency-type", function(result) {
+    var conversion_type = result['currency-type'];
+
+    for(var mut of mutList) {
+      if(mut.type == 'childList') {
+        for(var i = 0; i < mut.addedNodes.length; i++) {
+          walkText(mut.addedNodes[i], mut.target, conversion_type);
+        }
       }
     }
-  }
+  });
 }
 
 var obs = new MutationObserver(obs_callback);
-walkText(document.body, document);
+chrome.storage.sync.get("currency-type", function(result) {
+  walkText(document.body, document, result['currency-type']);
+});
 
 obs.observe(document.body, {attributes: true, childList: true, subtree: true});
